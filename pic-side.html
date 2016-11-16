@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>焦点图 - 左右滚动</title>
+<style type="text/css">
+* { padding: 0; margin: 0; }
+li { list-style: none; }
+img { border: none; }
+body { background: #ecfaff; }
+.box { width: 470px; height: 150px; overflow: hidden; position: relative; margin: 150px auto 0; background: #ccc; }
+.box ol { position: absolute; left: 200px; bottom: 5px; z-index: 2; }
+.box ol li { float: left; margin-right: 3px; display: inline; cursor: pointer; background: #fcf2cf; border: 1px solid #f47500; padding: 2px 6px; color: #d94b01; font-family: arial; font-size: 12px; }
+.box .active { padding: 3px 8px; font-weight: bold; color: #ffffff; background: #ffb442; position: relative; bottom: 2px; }
+.box ul { position: absolute; top: 0; left: 0; z-index: 1; }
+.box ul li { width: 470px; height: 150px; float: left; }
+.box ul img { float: left; width: 470px; height: 150px; }
+.box p { width: 20px; height: 20px; line-height: 20px; font-family: arial; color: #fff; text-align: center; font-weight: bold; background: #333; border: 1px solid #ccc; position: absolute; top: 60px; z-index: 2; cursor: pointer; }
+.box .prev { left: 10px; }
+.box .next { right: 10px; }
+</style>
+</head>
+<body>
+<div class="box" id="slider">
+<ul>
+<li><a href="javascript: void(0);"><img src="/uploads/common/images/img_01.jpg" alt="广告一" /></a></li>
+<li><a href="javascript: void(0);"><img src="/uploads/common/images/img_02.jpg" alt="广告二" /></a></li>
+<li><a href="javascript: void(0);"><img src="/uploads/common/images/img_03.jpg" alt="广告三" /></a></li>
+<li><a href="javascript: void(0);"><img src="/uploads/common/images/img_04.jpg" alt="广告四" /></a></li>
+<li><a href="javascript: void(0);"><img src="/uploads/common/images/img_05.jpg" alt="广告五" /></a></li>
+</ul>
+</div>
+<script type="text/javascript">
+var Effect = (function() {
+var Slider = function(o) {
+this.setting      = typeof o === 'object' ? o : {};
+this.target       = this.setting.target || 'slider';
+this.showMarkers  = this.setting.showMarkers || false;
+this.showControls = this.setting.showControls || false;
+this.timer        = null;
+this.currentTime  = null;
+this.ms           = 35;
+this.autoMs       = 3000;
+this.iTarget      = 0;
+this.nextTarget   = 0;
+this.speed        = 0;
+this.init();
+this.handleEvent();
+};
+Slider.prototype = {
+init: function() {
+this.obj      = document.getElementById(this.target);
+this.oUl      = this.obj.getElementsByTagName('ul')[0];
+this.aUlLis   = this.oUl.getElementsByTagName('li');
+this.width    = this.aUlLis[0].offsetWidth;
+this.number   = this.aUlLis.length;
+this.oUl.style.width = this.width * this.number + 'px';
+if(this.showMarkers) {
+var oDiv = document.createElement('div');
+var aLis = [];
+for(var i = 0; i < this.number; i++) {
+aLis.push('<li>'+ (i+1) +'<\/li>');
+};
+oDiv.innerHTML = '<ol>'+ aLis.join('') +'<\/ol>';
+this.obj.appendChild(oDiv.firstChild);
+this.aLis = this.obj.getElementsByTagName('ol')[0].getElementsByTagName('li');
+this.aLis[0].className = 'active';
+oDiv = null;
+};
+if(this.showControls) {
+this.oPrev = document.createElement('p');
+this.oNext = document.createElement('p');
+this.oPrev.className = 'prev';
+this.oPrev.innerHTML = '«';
+this.oNext.className = 'next';
+this.oNext.innerHTML = '»';
+this.obj.appendChild(this.oPrev);
+this.obj.appendChild(this.oNext);
+};
+},
+handleEvent: function() {
+var that = this;
+this.currentTime = setInterval(function() {
+that.autoPlay();
+}, this.autoMs);
+this.addEvent(this.obj, 'mouseover', function() {
+clearInterval(that.currentTime);
+});
+this.addEvent(this.obj, 'mouseout', function() {
+that.currentTime = setInterval(function() {
+that.autoPlay();
+}, that.autoMs);
+});
+if(this.showMarkers) {
+for(var i = 0; i < this.number; i++) {
+var el = this.aLis[i];
+(function(index) {
+that.addEvent(el, 'mouseover', function() {
+that.goTime(index);
+});
+})(i);
+};
+};
+if(this.showControls) {
+this.addEvent(this.oPrev, 'click', function() {
+that.fnPrev();
+});
+this.addEvent(this.oNext, 'click', function() {
+that.autoPlay();
+});
+};
+},
+addEvent: function(el, type, fn) {
+if(window.addEventListener) {
+el.addEventListener(type, fn, false);
+}
+else if(window.attachEvent) {
+el.attachEvent('on' + type, fn);
+};
+},
+fnPrev: function() {
+this.nextTarget--;
+if(this.nextTarget < 0) {
+this.nextTarget = this.number - 1;
+};
+this.goTime(this.nextTarget);
+},
+autoPlay: function() {
+this.nextTarget++;
+if(this.nextTarget >= this.number) {
+this.nextTarget = 0;
+};
+this.goTime(this.nextTarget);
+},
+goTime: function(index) {
+var that = this;
+if(this.showMarkers) {
+for(var i = 0; i < this.number; i++) {
+i == index ? this.aLis[i].className = 'active' : this.aLis[i].className = '';
+};
+};
+this.iTarget = -index * this.width;
+if(this.timer) {
+clearInterval(this.timer);
+};
+this.timer = setInterval(function() {
+that.doMove(that.iTarget);
+}, this.ms);
+},
+doMove: function(target) {
+this.oUl.style.left = this.speed + 'px';
+this.speed += (target - this.oUl.offsetLeft) / 3;
+if(Math.abs(target - this.oUl.offsetLeft) === 0) {
+this.oUl.style.left = target + 'px';
+clearInterval(this.timer);
+this.timer = null;
+};
+}
+};
+return {
+slider: function(o) {
+var tt = new Slider(o);
+}
+};
+})();
+Effect.slider({
+'targetElement': 'slider',
+'showMarkers': true,
+'showControls': true
+});
+</script>
+</body>
+</html> <div style="text-align:center;margin:30px 0 0 0;"><hr style="color:#999;height:1px;">如不能显示效果，请按Ctrl+F5刷新本页，更多网页代码：<a href='http://www.veryhuo.com/' target='_blank'>http://www.veryhuo.com/</a></div>

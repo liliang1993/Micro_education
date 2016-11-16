@@ -1,0 +1,243 @@
+@charset "utf-8";
+.public-header {
+	height:28px;
+	width:100%;
+	background-color: #000;
+}
+.public-container {
+	position:relative;
+	margin: 0 auto;
+    /*background-color: #006dcc;*/
+  /* height: 29px;*/
+    width:1171px;
+
+   }
+ .header-nav-left{
+ 	float:left;
+ 	height:28px;
+ 	width:40%;
+ 	overflow: hidden;
+ }
+  .header-nav-left li{
+    float:left;
+    width:84px;
+    height:14px;
+    list-style-type:none;
+    text-align: center;
+    border-left:1px solid #fff;
+    line-height: 14px;
+    
+ }
+ .header-nav-left ul{
+ 	margin-left:-13px;
+ 	height: 14px;
+ 	position: relative;
+ 	top:50%;  /*针对父元素百分比*/
+    transform:translate(0,-50%);/*针对自身百分比,上负下正*/
+ }
+
+ .header-nav-left a:link,.header-nav-left a:visited{
+ 	font-size: 14px;
+ 	color:#fff;
+ 	font-family: "微软雅黑";	
+ }
+ .header-nav-left a:hover,.header-nav-left a:active{
+  	font-size: 14px;
+ 	color:#f00;
+    font-family: "微软雅黑";
+ 	
+ }
+ .header-nav-right{
+ 	float:right;
+ 	height: 28px;
+ 	width:60%;
+ }
+.sign-in{
+	float:right;
+	height:28px;
+	width:60px;
+	text-align: center;
+	line-height:28px;
+	background-color: #E91B1B;
+}
+.log-in{
+   float:right;
+   height:28px;
+	width:60px;
+	text-align: center;
+	line-height: 28px;
+    background-color: #FDA100;
+}
+ .header-nav-right a:link,.header-nav-right a:visited{
+ 	font-size: 12px;
+ 	color:#fff;
+ 	font-family: "微软雅黑";
+ 	
+ 	
+ }
+ .header-nav-right a:hover,.header-nav-right a:active{
+ 	font-size: 12px;
+ 	color:#000;
+    font-family: " 微软雅黑";
+ 	
+ }
+ .index-top{
+ 	height:98px;
+
+ }
+ .top-left{
+ float:left;
+ height:52px;
+}
+.top-left img{
+	/*position:absolute; 
+	top:50%;
+	transform:translate(0,-50%);*/
+	display: block;
+	float:left;
+    margin-top: 12px;
+}
+ .top-right{
+ 	float:right;
+ 	width:215px;
+ 	height:52px;
+ 	margin-top:25px;
+    background:url("../image/service-tell.png") no-repeat right center;
+ }
+ .index-nav{
+     height:44px;
+     background-color: #BB001B;
+     width:100%;
+ }
+ .nav-list ul li{
+   float:left;
+   height:44px;
+   width:167px;
+   line-height: 44px;
+   text-align: center;
+   background: url(../image/nav-border.png) no-repeat right center;
+  /*font-weight:bold;*/ 
+ }
+ .nav-list ul li:first-child {
+  	background: url(../image/checked-bg.png) left center;
+  }
+ .nav-list a{
+ 	font-size: 18px;
+ 	color:#fff;
+ 	font-family: "微软雅黑";	
+ }
+ .index-banner{
+  height:436px;
+  width:1600px;
+  margin:0 auto;
+ overflow: hidden;
+ }
+.public-floor{
+	background-color:#2b2c31;
+	width:100%;
+	height:442px;
+	border-top: 10px solid #898989;
+}
+.public-floor-content{
+	 margin-bottom:67px; 
+	/*outline:1px solid blue;*/ 
+}
+.floor-box{
+	float:left;
+	border-right:1px solid #353639;
+	margin-top: 20px;
+	/*background-color: blue;*/
+	height:311px;
+}
+
+.floor-box-header{
+	height:30px;
+	line-height: 30px;	
+}
+.service{
+	background:url(../image/pic-service.jpg) no-repeat;
+	background-position: 19px 6px;
+	width:179px;
+}
+.fuction{
+	background:url(../image/pic-fuction.jpg) no-repeat;
+	background-position: 19px 6px;
+	width:359px;
+
+}
+.case{
+	background:url(../image/pic-case.jpg) no-repeat;
+	background-position: 19px 6px;
+	width:269px;
+}
+.agency{
+	background:url(../image/pic-agency.jpg) no-repeat;
+	background-position: 19px 6px;
+	width:179px;
+}
+.about-us{
+	background:url(../image/pic-about-us.jpg) no-repeat;
+	background-position: 19px 6px;
+	width:179px;
+}
+.floor-tip{
+	display: block;
+	margin-left:50px;
+	font-size: 20px;
+	text-shadow: 1px -1px 0px #767779,-1px 0px 0px #767779;
+	font-family: "微软雅黑";
+	color:#FFF;
+}
+table{
+	 display: block;
+	 margin-top: 11px;
+     border-collapse:collapse;
+    }
+td{
+	height:24px;
+	line-height: 24px;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color:#838485;
+	text-shadow: 1px -1px 0px #4f5052; 
+	padding-left: 50px;
+	padding-right: 43px;
+}
+.floor-bottom{
+	clear:both;
+	height:48px;
+	border-top: 1px solid #353639;
+}
+.floor-bottom img{
+	   	vertical-align:middle;
+}
+.floor-tel,.floor-QQ,.floor-mail{
+	height:48px;
+	float:left;
+	line-height: 48px;
+	font-family: "微软雅黑";
+	font-size: 12px;
+	color:#838485;	
+}
+.floor-tel{
+	margin-left:19px; 
+}
+.tel-num{
+	font-family: "微软雅黑";
+	font-size: 14px;
+	color:#e43c3f;	
+}
+.floor-QQ{
+	margin-left: 24px;
+}
+.floor-mail{
+	margin-left: 27px;
+}*/
+@font-face{
+	font-family: "fzzdhjw"
+	src:url(../font/fzzdhjw.ttf)format("truetype");
+}
+@font-face{
+	font-family: "jdahei"
+	src:url(../font/jdahei.ttf)format("truetype");
+}
